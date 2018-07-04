@@ -1,2 +1,2 @@
-# npmDemo
-一个用来上传es6格式npm包的项目
+# chuck-alipay
+调支付宝网页支付的接口
