@@ -1,0 +1,95 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "mocha": true
+    },
+    "parser": "babel-eslint",
+    "plugins": ["meteor"],
+    "extends": "eslint-config-airbnb",
+    "parserOptions": {  
+        "ecmaVersion": 8,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "globals": {
+        "Meteor": true,
+        "Accounts": true,
+        "App": true,
+        "FS": true,
+        "EJSON": true,
+        "$": true,
+        "_": true,
+        "Boards": true
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "max-len": [
+            "off"
+        ],
+        "no-unused-vars": [
+            "off"
+        ],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowShortCircuit": true,
+                "allowTernary": true
+            }
+        ],
+        "no-alert": [
+            "off"
+        ],
+        "no-underscore-dangle": [
+            "off"
+        ],
+        "no-param-reassign": [
+            "off"
+        ],
+        "new-cap": [
+            "error",
+            {
+                "capIsNew": false
+            }
+        ],
+        "no-new": [
+            "off"
+        ],
+        "no-console": [
+            "off"
+        ],
+        "meteor/audit-argument-checks": [
+            "off"
+        ],
+        "meteor/eventmap-params": [
+            "error",
+            {
+                "templateInstanceParamName": "instance"
+            }
+        ],
+        "import/no-unresolved": [
+            "error",
+            {
+                "ignore": ["^meteor/", "^react", "/lib"]
+            }
+        ]
+    }
+}
