@@ -44,3 +44,19 @@ export const encodeValue = (signStr) => {
     return temSign;
 };
 
+// 用去区分判断手机网站支付和电脑网站支付
+export const chooseChanel = (channel) => {
+    const params = {
+        method: 'alipay.trade.page.pay',
+        product_code: 'FAST_INSTANT_TRADE_PAY',
+    };
+
+    switch(channel) {
+        case 'pc': return params;
+        case 'mobile': return Object.assign({
+            method: 'alipay.trade.wap.pay',
+            product_code: 'QUICK_WAP_WAY',
+        });
+        default: return params;
+    };
+};

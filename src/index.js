@@ -6,7 +6,7 @@
 
 import { alipayUrl } from './config';
 import moment from 'moment';
-import { generateParams, generateSign, encodeValue } from './utility';
+import { generateParams, generateSign, encodeValue, chooseChanel } from './utility';
 
 class Alipay {
 	constructor({ return_url, notify_url, app_id, privatekeyPath }) {
@@ -17,23 +17,19 @@ class Alipay {
 	};
 
 	// 手机网站支付
-	mobileWebPay(param) {
-		const { subject, out_trade_no, total_amount } = param;
+	pay(param, channel) {
+		const { method, product_code } = chooseChanel(channel);
+		const biz_content = JSON.stringify(Object.assign(param, { product_code }));
 		const data = {
 			app_id: this.app_id,
-			method: 'alipay.trade.wap.pay',
+			method,
 			charset: 'utf-8',
 			sign_type: 'RSA2',
 			timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
 			version: '1.0',
 			notify_url: this.notify_url,
 			return_url: this.return_url,
-			biz_content: JSON.stringify({
-				subject,
-				out_trade_no,
-				total_amount,
-				product_code: 'QUICK_WAP_WAY',
-			}),
+			biz_content,
 		};
 		const paramStr = generateParams(data);
 		const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
