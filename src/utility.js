@@ -1,3 +1,9 @@
+/**
+ * @author yangchunboy
+ * @date 2018.07.05
+ * 
+ */
+
 import fs from 'fs';
 import crypto from 'crypto-js';
 

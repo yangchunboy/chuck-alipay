@@ -1,3 +1,9 @@
+/**
+ * @author yangchunboy
+ * @date 2018.07.05
+ * 
+ */
+
 import { alipayUrl } from './config';
 import moment from 'moment';
 import { generateParams, generateSign, encodeValue } from './utility';
