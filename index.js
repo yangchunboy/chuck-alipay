@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = require('./src/index.js');
+var _index = require('./lib/index.js');
 
 var _index2 = _interopRequireDefault(_index);
 

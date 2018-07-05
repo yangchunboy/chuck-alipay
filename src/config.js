@@ -4,8 +4,4 @@
  * 
  */
 
-const alipayUrl = 'https://openapi.alipay.com/gateway.do?';
-
-export {
-	alipayUrl,
-};
+export const alipayUrl = 'https://openapi.alipay.com/gateway.do?';

@@ -5,7 +5,7 @@
  */
 
 import fs from 'fs';
-import crypto from 'crypto-js';
+import crypto from 'crypto';
 
 // 生成域名后面带的参数
 export const generateParams = (params) => {
@@ -29,7 +29,7 @@ export const generateSign = ({ paramStr, privatekeyPath }) => {
 };
 
 // 将字符串编码
-const encodeValue = (signStr) => {
+export const encodeValue = (signStr) => {
     let temSign = '';
     signStr.split('&').forEach((item, index) => {
         const arr = item.split('=');
