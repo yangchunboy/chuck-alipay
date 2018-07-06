@@ -3,9 +3,11 @@
 
 # 安装
 npm的安装方式
+
     npm install chuck-alipay
 # 使用方法
 手机网站支付参数参考链接：https://docs.open.alipay.com/203/107090，电脑网站支付参数参考链接：https://docs.open.alipay.com/270/alipay.trade.page.pay
+
     import Alipay from 'chuck-alipay';
 
     const data = {
