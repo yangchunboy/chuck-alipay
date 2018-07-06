@@ -1,6 +1,6 @@
 {
   "name": "chuck-alipay",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "支付宝支付",
   "main": "index.js",
   "scripts": {
