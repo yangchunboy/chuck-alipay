@@ -16,7 +16,7 @@ class Alipay {
 		this.privatekeyPath = privatekeyPath;
 	};
 
-	// 手机网站支付
+	// 网站支付
 	pay(param, channel) {
 		const { method, product_code } = chooseChanel(channel);
 		const biz_content = JSON.stringify(Object.assign(param, { product_code }));
@@ -37,6 +37,24 @@ class Alipay {
 		return `${alipayUrl}${encodeStr}`;
 	}
 
+	// app支付
+	appPay() {
+		const biz_content = JSON.stringify(Object.assign(param, { product_code: 'QUICK_MSECURITY_PAY' }));
+		const data = {
+			app_id: this.app_id,
+			method,
+			charset: 'utf-8',
+			sign_type: 'RSA2',
+			timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+			version: '1.0',
+			notify_url: this.notify_url,
+			biz_content,
+		};
+		const paramStr = generateParams(data);
+		const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
+		const encodeStr = encodeValue(signStr);
+		return encodeStr;
+	}
 };
 
 export default Alipay;
