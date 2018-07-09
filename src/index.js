@@ -6,6 +6,7 @@
 
 import { alipayUrl } from './config';
 import moment from 'moment';
+import request from 'request-promise-native';
 import { generateParams, generateSign, encodeValue, chooseChanel } from './utility';
 
 class Alipay {
@@ -38,11 +39,11 @@ class Alipay {
 	}
 
 	// app支付
-	appPay() {
+	appPay(param) {
 		const biz_content = JSON.stringify(Object.assign(param, { product_code: 'QUICK_MSECURITY_PAY' }));
 		const data = {
 			app_id: this.app_id,
-			method,
+			method: 'alipay.trade.app.pay',
 			charset: 'utf-8',
 			sign_type: 'RSA2',
 			timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -54,6 +55,29 @@ class Alipay {
 		const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
 		const encodeStr = encodeValue(signStr);
 		return encodeStr;
+	}
+
+	// 退款接口
+	async refund(param) {
+		const biz_content = JSON.stringify(Object.assign(param));
+		const data = {
+			app_id: this.app_id,
+			method: 'alipay.trade.refund',
+			format: 'JSON',
+			charset: 'utf-8',
+			sign_type: 'RSA2',
+			timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+			version: '1.0',
+			biz_content,
+		};
+		const paramStr = generateParams(data);
+		const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
+		const encodeStr = encodeValue(signStr);
+		const refundResult = await request({
+			method: 'get',
+			uri: `${alipayUrl}${encodeStr}`,
+		});
+		return refundResult;
 	}
 };
 
