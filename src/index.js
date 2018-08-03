@@ -79,6 +79,53 @@ class Alipay {
 		});
 		return refundResult;
 	}
+
+	// 支付结果查询
+	async tradeQuery(param) {
+		const biz_content = JSON.stringify(Object.assign(param)); 
+		const data = {
+			app_id: this.app_id,
+			method: 'alipay.trade.query',
+			format: 'JSON',
+			charset: 'utf-8',
+			sign_type: 'RSA2',
+			timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+			version: '1.0',
+			biz_content,
+		};
+		const paramStr = generateParams(data);
+		const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
+		const encodeStr = encodeValue(signStr);
+		const queryResult = await request({
+			method: 'get',
+			uri: `${alipayUrl}${encodeStr}`,
+		});
+		return queryResult;
+	}
+
+	// 退款结果查询
+	async refundQuery(param) {
+		const biz_content = JSON.stringify(Object.assign(param)); 
+		const data = {
+			app_id: this.app_id,
+			method: 'alipay.trade.fastpay.refund.query',
+			format: 'JSON',
+			charset: 'utf-8',
+			sign_type: 'RSA2',
+			timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+			version: '1.0',
+			biz_content,
+		};
+		const paramStr = generateParams(data);
+		const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
+		const encodeStr = encodeValue(signStr);
+		const queryResult = await request({
+			method: 'get',
+			uri: `${alipayUrl}${encodeStr}`,
+		});
+		return queryResult;
+	}
+
 };
 
 export default Alipay;
