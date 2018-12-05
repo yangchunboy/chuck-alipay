@@ -99,7 +99,7 @@ npm的安装方式
         out_trade_no: 'DD12345678', // 订单支付时传入的商户订单号,和支付宝交易号不能同时为空。trade_no,out_trade_no如果同时存在优先取trade_no
         trade_no: 'xxxxxxx', 
     };
-    const refundResult = alipay.refund(biz_content);
+    const refundResult = alipay.tradeQuery(biz_content);
     refundResult.then((ressult) => {
         console.log(ressult);
     });
@@ -164,9 +164,9 @@ npm的安装方式
     const biz_content = {
         out_trade_no: 'DD12345678', // 支付宝交易号
         trade_no: 'xxxxxxx', //订单支付时传入的商户订单号,和支付宝交易号不能同时为空。 trade_no,out_trade_no如果同时存在优先取trade_no
-        out_request_no: 'xxxxxx',
+        out_request_no: 'xxxxxx', // 请求退款接口时，传入的退款请求号，如果在退款请求时未传入，则该值为创建交易时的外部交易号
     };
-    const refundResult = alipay.refund(biz_content);
+    const refundResult = alipay.refundQuery(biz_content);
     refundResult.then((ressult) => {
         console.log(ressult);
     });
