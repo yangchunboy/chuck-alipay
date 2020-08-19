@@ -12,6 +12,8 @@ npm的安装方式
 
  [调用支付宝APP支付参数参考链接](https://docs.open.alipay.com/204/105465/)
 
+```javascript
+
     const { default: Alipay } = require('chuck-alipay'); 
 
     const param = {
@@ -30,10 +32,13 @@ npm的安装方式
     const url = alipay.pay(biz_content, 'mobile') // 手机网站支付第二个参数传mobile
     const url = alipay.pay(biz_content, 'pc') // 电脑网站支付第二个参数传pc
     const signString = alipay.appPay(biz_content); // 一个签名的字符串用于调用APP支付
-网站支付将拿到的这个url返回给浏览器执行location.assign(url)，APP支付拿到了签名的string后调用[cordova的支付宝支付](https://www.npmjs.com/package/cordova-plugin-alipay-v2)
+// 网站支付将拿到的这个url返回给浏览器执行location.assign(url)，APP支付拿到了签名的string后调用[cordova的支付宝支付](https://www.npmjs.com/package/cordova-plugin-alipay-v2)
+```
 
 ## 支付宝退款
 [支付宝退款参数参考链接](https://docs.open.alipay.com/api_1/alipay.trade.refund)
+
+```javascript
 
     const { default: Alipay } = require('chuck-alipay'); 
 
@@ -53,7 +58,7 @@ npm的安装方式
         console.log(ressult);
     });
 
-执行成功返回的结果是：
+// 执行成功返回的结果是：
 
     {
         "alipay_trade_refund_response": {
@@ -84,8 +89,12 @@ npm的安装方式
         "sign": "ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE"
     }
 
+```
+
 ## 支付宝交易查询
 [支付宝交易查询参数参考链接](https://docs.open.alipay.com/api_1/alipay.trade.query)
+
+```javascript
 
     const { default: Alipay } = require('chuck-alipay'); 
 
@@ -104,7 +113,7 @@ npm的安装方式
         console.log(ressult);
     });
 
-执行成功返回的结果是：
+// 执行成功返回的结果是：
 
     {
         "alipay_trade_query_response": {
@@ -149,10 +158,12 @@ npm的安装方式
         },
         "sign": "ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE"
     }
+```
 
 ## 支付宝退款查询
 [支付宝退款查询参数参考链接](https://docs.open.alipay.com/api_1/alipay.trade.fastpay.refund.query)
 
+```javascript
     const { default: Alipay } = require('chuck-alipay'); 
 
     const param = {
@@ -171,7 +182,8 @@ npm的安装方式
         console.log(ressult);
     });
 
-执行成功返回的结果是：
+// 执行成功返回的结果是：
+
 
     {
         "alipay_trade_fastpay_refund_query_response": {
@@ -212,6 +224,7 @@ npm的安装方式
         },
         "sign": "ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE"
     }
+```
 
 ## 指定支付宝账户转账
 [支付宝指定单笔转账接口的参数查询](https://opendocs.alipay.com/apis/api_28/alipay.fund.trans.uni.transfer/)
