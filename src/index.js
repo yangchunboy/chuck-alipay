@@ -124,7 +124,35 @@ class Alipay {
 			uri: `${alipayUrl}${encodeStr}`,
 		});
 		return queryResult;
-	}
+  }
+  
+  // 单笔现金转账
+  async singleTranser(param) {
+    try{
+      const biz_content = JSON.stringify(Object.assign(param));
+      const data = {
+        app_id: this.app_id,
+        method: 'alipay.fund.trans.uni.transfer',
+        format: 'JSON',
+        charset: 'utf-8',
+        sign_type: 'RSA2',
+        timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
+        version: '1.0',
+        biz_content,
+      };
+      const paramStr = generateParams(data);
+      const signStr = generateSign({ paramStr, privatekeyPath: this.privatekeyPath });
+      const encodeStr = encodeValue(signStr);
+      const result = await request({
+        method: 'get',
+        uri: `${alipayUrl}${encodeStr}`,
+      });
+      return result;
+
+    }catch(error) {
+      return error;
+    }
+  }
 
 };
 

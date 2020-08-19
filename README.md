@@ -12,7 +12,7 @@ npm的安装方式
 
  [调用支付宝APP支付参数参考链接](https://docs.open.alipay.com/204/105465/)
 
-    import Alipay from 'chuck-alipay';
+    const { default: Alipay } = require('chuck-alipay'); 
 
     const param = {
         app_id: 'xxx', // 支付宝分配给开发者的应用ID
@@ -35,7 +35,7 @@ npm的安装方式
 ## 支付宝退款
 [支付宝退款参数参考链接](https://docs.open.alipay.com/api_1/alipay.trade.refund)
 
-    import Alipay from 'chuck-alipay';
+    const { default: Alipay } = require('chuck-alipay'); 
 
     const param = {
         app_id: 'xxx', // 支付宝分配给开发者的应用ID
@@ -87,7 +87,7 @@ npm的安装方式
 ## 支付宝交易查询
 [支付宝交易查询参数参考链接](https://docs.open.alipay.com/api_1/alipay.trade.query)
 
-    import Alipay from 'chuck-alipay';
+    const { default: Alipay } = require('chuck-alipay'); 
 
     const param = {
         app_id: 'xxx', // 支付宝分配给开发者的应用ID
@@ -153,7 +153,7 @@ npm的安装方式
 ## 支付宝退款查询
 [支付宝退款查询参数参考链接](https://docs.open.alipay.com/api_1/alipay.trade.fastpay.refund.query)
 
-    import Alipay from 'chuck-alipay';
+    const { default: Alipay } = require('chuck-alipay'); 
 
     const param = {
         app_id: 'xxx', // 支付宝分配给开发者的应用ID
@@ -212,3 +212,43 @@ npm的安装方式
         },
         "sign": "ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE"
     }
+
+## 指定支付宝账户转账
+[支付宝指定单笔转账接口的参数查询](https://opendocs.alipay.com/apis/api_28/alipay.fund.trans.uni.transfer/)
+```javascript
+    const { default: Alipay } = require('chuck-alipay'); 
+
+    const param = {
+        app_id: 'xxx', // 支付宝分配给开发者的应用ID
+        privatekeyPath: 'xxx', // 支付宝privatekey.txt文件在服务器上的路径
+    };
+
+    const alipay = new Alipay(param);
+    const biz_content = {
+      out_biz_no: 'xxxxx',
+      trans_amount: 0.01,
+      product_code: 'TRANS_ACCOUNT_NO_PWD',
+      biz_scene: 'DIRECT_TRANSFER',
+      payee_info: {
+        identity: '支付宝账号',
+        identity_type: 'ALIPAY_LOGON_ID',
+        remark: '备注转账',
+      }
+    };
+    const res = await alipay.singleTranser(biz_content);
+
+    // 执行成功的返回结果是
+    {
+        "alipay_fund_trans_uni_transfer_response": {
+            "code": "10000",
+            "msg": "Success",
+            "out_biz_no": "201808080001",
+            "order_id": "20190801110070000006380000250621",
+            "pay_fund_order_id": "20190801110070001506380000251556",
+            "status": "SUCCESS",
+            "trans_date": "2019-08-21 00:00:00"
+        },
+        "sign": "ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE"
+    }
+```
+
